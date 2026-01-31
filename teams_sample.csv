@@ -1,0 +1,65 @@
+name,seed,region
+Duke,1,East
+UConn,1,West
+Houston,1,South
+Purdue,1,Midwest
+Arizona,2,East
+Tennessee,2,West
+Iowa State,2,South
+Marquette,2,Midwest
+Kentucky,3,East
+Creighton,3,West
+Baylor,3,South
+Illinois,3,Midwest
+Auburn,4,East
+Alabama,4,West
+Kansas,4,South
+Wisconsin,4,Midwest
+San Diego State,5,East
+Saint Mary's,5,West
+Gonzaga,5,South
+Texas Tech,5,Midwest
+BYU,6,East
+Clemson,6,West
+Texas,6,South
+Florida,6,Midwest
+Washington State,7,East
+Dayton,7,West
+Texas A&M,7,South
+Northwestern,7,Midwest
+Florida Atlantic,8,East
+Mississippi State,8,West
+Utah State,8,South,
+Nebraska,8,Midwest
+TCU,9,East
+Michigan State,9,West
+NC State,9,South
+Texas Christian,9,Midwest
+Colorado,10,East
+Boise State,10,West
+Nevada,10,South
+Colorado State,10,Midwest
+New Mexico,11,East
+Oregon,11,West
+VCU,11,South
+Iowa,11,Midwest
+James Madison,12,East
+UAB,12,West
+McNeese State,12,South
+Samford,12,Midwest
+Yale,13,East
+Charleston,13,West
+Vermont,13,South
+Akron,13,Midwest
+Morehead State,14,East
+Colgate,14,West
+Oakland,14,South
+Western Kentucky,14,Midwest
+St. Peter's,15,East
+South Dakota State,15,West
+Long Beach State,15,South
+Iona,15,Midwest
+Texas Southern,16,East
+Norfolk State,16,West
+Grambling,16,South
+Howard,16,Midwest
