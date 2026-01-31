@@ -1,72 +1,1319 @@
-Team PACK CHALLENGE
-Home
-Leaderboard
-Teams
-My Team
-Admin
-Team PACK CHALLENGE – HOW IT WORKS
-Enter your name and email to receive your Team Pack.
-Each person may register only once per event.
-If you try to register again using the same email, you will not receive a new pack. Instead, you will be shown your original four teams.
-YOUR Team PACK
-When you sign up, you are randomly assigned 4 teams.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Pack Challenge</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-Each pack includes:
+    :root {
+      --navy: #1e3a5f;
+      --orange: #ff6b35;
+      --light-gray: #f5f5f5;
+      --gray: #666;
+      --white: #ffffff;
+    }
 
-1 team seeded 1–3
-1 team seeded 4–6
-1 team seeded 7–10
-1 team seeded 11–16
-No more than 2 teams from the same region.
-None of your teams will play each other in the first round.
-No two participants will have the same 4-team combination.
-HOW YOU SCORE
-You earn points when your ORIGINAL four teams win.
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--navy) 0%, #2c5282 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
 
-Base Points Per Round:
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
 
-Round of 64 = 1 point
-Round of 32 = 2 points
-Sweet 16 = 4 points
-Elite 8 = 7 points
-Final Four = 12 points
-Championship = 20 points
-Upset Bonus:
+    .header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 30px;
+      text-align: center;
+      position: relative;
+    }
 
-If your team beats a higher seed, you earn bonus points equal to: Opponent seed minus your seed (maximum 10 bonus points).
+    .logo-container {
+      margin-bottom: 20px;
+    }
 
-Example: A 12 seed beats a 5 seed = 7 bonus points.
+    .logo {
+      max-width: 200px;
+      max-height: 80px;
+    }
 
-WEEKLY WINNERS
-Week 1: Round of 64 + Round of 32 ($50 / $25 / $10)
-Week 2: Sweet 16 + Elite 8 ($50 / $25 / $10)
-Week 3: Final Four + Championship ($50 / $25 / $10)
-Each week has its own winner based on points scored during that week.
+    .header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
 
-WEEK 2 BONUS TEAM
-At the start of Week 2, anyone who has lost at least one original team will receive one additional Bonus Team from the remaining field.
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
 
-The Bonus Team counts toward Week 2 and 3 scoring only
-Does NOT count toward your overall total
-This keeps everyone competitive heading into the second weekend.
+    .nav button {
+      background: var(--orange);
+      color: var(--white);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
 
-OVERALL WINNER
-The Overall Champion is determined by total points from your ORIGINAL four teams only.
+    .nav button:hover {
+      background: #ff8555;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+    }
 
-The Week 2 Bonus Team does not affect the overall standings.
+    .nav button.active {
+      background: var(--white);
+      color: var(--navy);
+    }
 
-Overall Winner Prize: $100
+    .content {
+      padding: 40px;
+    }
 
-LEADERBOARD
-Track:
+    .section {
+      display: none;
+    }
 
-Overall ranking
-Weekly rankings
-Teams still alive
-Rank movement
-The goal is simple: survive and score.
+    .section.active {
+      display: block;
+    }
 
-Register Now
-Full Name *
-Email Address *
-Get My Team Pack
+    .rules {
+      background: var(--light-gray);
+      padding: 30px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      border-left: 5px solid var(--orange);
+    }
+
+    .rules h2 {
+      color: var(--navy);
+      margin-bottom: 15px;
+      font-size: 1.8em;
+    }
+
+    .rules h3 {
+      color: var(--navy);
+      margin: 20px 0 10px 0;
+      font-size: 1.3em;
+    }
+
+    .rules p, .rules ul {
+      color: var(--gray);
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+
+    .rules ul {
+      margin-left: 25px;
+    }
+
+    .rules li {
+      margin-bottom: 8px;
+    }
+
+    .form-container {
+      max-width: 500px;
+      margin: 30px auto;
+      background: var(--light-gray);
+      padding: 30px;
+      border-radius: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      font-size: 1em;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--orange);
+    }
+
+    .btn {
+      background: var(--orange);
+      color: var(--white);
+      border: none;
+      padding: 14px 30px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1.1em;
+      font-weight: 600;
+      width: 100%;
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      background: #ff8555;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+    }
+
+    .btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .teams-display {
+      margin-top: 30px;
+    }
+
+    .team-pack {
+      background: var(--white);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border: 3px solid var(--navy);
+    }
+
+    .team-pack h3 {
+      color: var(--navy);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .team-item {
+      background: var(--light-gray);
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s;
+    }
+
+    .team-item:hover {
+      background: #e8e8e8;
+    }
+
+    .team-item.eliminated {
+      opacity: 0.5;
+      color: var(--gray);
+    }
+
+    .team-item.eliminated .team-name {
+      text-decoration: line-through;
+    }
+
+    .team-name {
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .team-seed {
+      background: var(--orange);
+      color: var(--white);
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-weight: 600;
+    }
+
+    .team-region {
+      color: var(--gray);
+      font-size: 0.9em;
+    }
+
+    .leaderboard {
+      overflow-x: auto;
+    }
+
+    .leaderboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .leaderboard-table thead {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .leaderboard-table th,
+    .leaderboard-table td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .leaderboard-table tbody tr:hover {
+      background: var(--light-gray);
+      cursor: pointer;
+    }
+
+    .leaderboard-table .rank {
+      font-weight: 700;
+      color: var(--orange);
+      font-size: 1.2em;
+    }
+
+    .leaderboard-table .rank.first {
+      color: #FFD700;
+    }
+
+    .leaderboard-table .rank.second {
+      color: #C0C0C0;
+    }
+
+    .leaderboard-table .rank.third {
+      color: #CD7F32;
+    }
+
+    .cinderella-box {
+      background: linear-gradient(135deg, var(--orange) 0%, #ff8555 100%);
+      color: var(--white);
+      padding: 25px;
+      border-radius: 10px;
+      margin: 30px 0;
+      box-shadow: 0 5px 20px rgba(255, 107, 53, 0.3);
+    }
+
+    .cinderella-box h3 {
+      margin-bottom: 15px;
+      font-size: 1.5em;
+      text-align: center;
+    }
+
+    .upset-item {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      backdrop-filter: blur(10px);
+    }
+
+    .upset-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .bracket-container {
+      margin-top: 20px;
+    }
+
+    .region-bracket {
+      margin-bottom: 30px;
+      border: 2px solid var(--navy);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .region-header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 15px 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .region-header:hover {
+      background: #2c5282;
+    }
+
+    .region-header h3 {
+      margin: 0;
+    }
+
+    .region-header .arrow {
+      transition: transform 0.3s;
+    }
+
+    .region-header .arrow.rotated {
+      transform: rotate(180deg);
+    }
+
+    .region-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      background: var(--white);
+    }
+
+    .region-content.expanded {
+      max-height: 2000px;
+    }
+
+    .region-teams {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .admin-section {
+      background: var(--light-gray);
+      padding: 30px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .admin-section h3 {
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+
+    .file-upload {
+      border: 2px dashed var(--navy);
+      padding: 30px;
+      text-align: center;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-bottom: 20px;
+    }
+
+    .file-upload:hover {
+      border-color: var(--orange);
+      background: rgba(255, 107, 53, 0.1);
+    }
+
+    .file-upload input[type="file"] {
+      display: none;
+    }
+
+    .message {
+      padding: 15px;
+      border-radius: 5px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .message.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .message.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .message.info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--gray);
+    }
+
+    .spinner {
+      border: 4px solid var(--light-gray);
+      border-top: 4px solid var(--orange);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .week-selector {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .week-selector button {
+      background: var(--light-gray);
+      color: var(--navy);
+      border: 2px solid var(--navy);
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .week-selector button:hover {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .week-selector button.active {
+      background: var(--orange);
+      color: var(--white);
+      border-color: var(--orange);
+    }
+
+    .payout-badge {
+      background: #28a745;
+      color: var(--white);
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.85em;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--white);
+      padding: 40px;
+      border-radius: 15px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 2em;
+      cursor: pointer;
+      color: var(--gray);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+
+    .modal-close:hover {
+      background: var(--light-gray);
+      color: var(--navy);
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 1.8em;
+      }
+
+      .content {
+        padding: 20px;
+      }
+
+      .nav {
+        flex-direction: column;
+      }
+
+      .nav button {
+        width: 100%;
+      }
+
+      .leaderboard-table {
+        font-size: 0.9em;
+      }
+
+      .leaderboard-table th,
+      .leaderboard-table td {
+        padding: 10px 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo-container" id="logoContainer"></div>
+      <h1>Team PACK CHALLENGE</h1>
+      <div class="nav">
+        <button class="active" onclick="showSection('home')">Home</button>
+        <button onclick="showSection('leaderboard')">Leaderboard</button>
+        <button onclick="showSection('bracket')">Teams</button>
+        <button onclick="showSection('myteam')">My Team</button>
+        <button onclick="showSection('admin')">Admin</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Home Section -->
+      <div id="home" class="section active">
+        <div class="rules">
+          <h2>Team PACK CHALLENGE – HOW IT WORKS</h2>
+          
+          <h3>Enter your name and email to receive your Team Pack.</h3>
+          <ul>
+            <li>Each person may register only once per event.</li>
+            <li>If you try to register again using the same email, you will not receive a new pack. Instead, you will be shown your original four teams.</li>
+          </ul>
+
+          <h3>YOUR Team PACK</h3>
+          <p>When you sign up, you are randomly assigned 4 teams.</p>
+          <p>Each pack includes:</p>
+          <ul>
+            <li>1 team seeded 1–3</li>
+            <li>1 team seeded 4–6</li>
+            <li>1 team seeded 7–10</li>
+            <li>1 team seeded 11–16</li>
+            <li>No more than 2 teams from the same region.</li>
+            <li>None of your teams will play each other in the first round.</li>
+            <li>No two participants will have the same 4-team combination.</li>
+          </ul>
+
+          <h3>HOW YOU SCORE</h3>
+          <p>You earn points when your ORIGINAL four teams win.</p>
+          <p><strong>Base Points Per Round:</strong></p>
+          <ul>
+            <li>Round of 64 = 1 point</li>
+            <li>Round of 32 = 2 points</li>
+            <li>Sweet 16 = 4 points</li>
+            <li>Elite 8 = 7 points</li>
+            <li>Final Four = 12 points</li>
+            <li>Championship = 20 points</li>
+          </ul>
+          <p><strong>Upset Bonus:</strong></p>
+          <p>If your team beats a higher seed, you earn bonus points equal to: Opponent seed minus your seed (maximum 10 bonus points).</p>
+          <p>Example: A 12 seed beats a 5 seed = 7 bonus points.</p>
+
+          <h3>WEEKLY WINNERS</h3>
+          <ul>
+            <li>Week 1: Round of 64 + Round of 32 ($50 / $25 / $10)</li>
+            <li>Week 2: Sweet 16 + Elite 8 ($50 / $25 / $10)</li>
+            <li>Week 3: Final Four + Championship ($50 / $25 / $10)</li>
+          </ul>
+          <p>Each week has its own winner based on points scored during that week.</p>
+
+          <h3>WEEK 2 BONUS TEAM</h3>
+          <p>At the start of Week 2, anyone who has lost at least one original team will receive one additional Bonus Team from the remaining field.</p>
+          <ul>
+            <li>The Bonus Team counts toward Week 2 and 3 scoring only</li>
+            <li>Does NOT count toward your overall total</li>
+          </ul>
+          <p>This keeps everyone competitive heading into the second weekend.</p>
+
+          <h3>OVERALL WINNER</h3>
+          <p>The Overall Champion is determined by total points from your ORIGINAL four teams only.</p>
+          <p>The Week 2 Bonus Team does not affect the overall standings.</p>
+          <p><strong>Overall Winner Prize: $100</strong></p>
+
+          <h3>LEADERBOARD</h3>
+          <p>Track:</p>
+          <ul>
+            <li>Overall ranking</li>
+            <li>Weekly rankings</li>
+            <li>Teams still alive</li>
+            <li>Rank movement</li>
+          </ul>
+          <p><strong>The goal is simple: survive and score.</strong></p>
+        </div>
+
+        <div class="cinderella-box" id="cinderellaBox" style="display: none;">
+          <h3>🔥 Cinderella Stories - Biggest Upsets 🔥</h3>
+          <div id="upsetsList"></div>
+        </div>
+
+        <div class="form-container">
+          <h2 style="color: var(--navy); margin-bottom: 20px; text-align: center;">Register Now</h2>
+          <div id="messageContainer"></div>
+          <form id="registerForm">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <button type="submit" class="btn">Get My Team Pack</button>
+          </form>
+        </div>
+
+        <div id="registrationResult" class="teams-display" style="display: none;"></div>
+      </div>
+
+      <!-- Leaderboard Section -->
+      <div id="leaderboard" class="section">
+        <h2 style="color: var(--navy); margin-bottom: 20px;">Leaderboard</h2>
+        
+        <div class="week-selector">
+          <button class="active" onclick="loadLeaderboard('overall')">Overall</button>
+          <button onclick="loadLeaderboard('week1')">Week 1</button>
+          <button onclick="loadLeaderboard('week2')">Week 2</button>
+          <button onclick="loadLeaderboard('week3')">Week 3</button>
+        </div>
+
+        <div class="leaderboard">
+          <div id="leaderboardLoading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading leaderboard...</p>
+          </div>
+          <div id="leaderboardContent"></div>
+        </div>
+      </div>
+
+      <!-- Bracket/Teams Section -->
+      <div id="bracket" class="section">
+        <h2 style="color: var(--navy); margin-bottom: 20px;">Tournament Teams</h2>
+        <div class="bracket-container" id="bracketContainer">
+          <div class="loading">
+            <div class="spinner"></div>
+            <p>Loading teams...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- My Team Section -->
+      <div id="myteam" class="section">
+        <h2 style="color: var(--navy); margin-bottom: 20px;">My Team</h2>
+        <div id="myTeamContent">
+          <div class="message info">
+            Please register first to see your team.
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Section -->
+      <div id="admin" class="section">
+        <h2 style="color: var(--navy); margin-bottom: 30px;">Admin Panel</h2>
+        
+        <div class="admin-section">
+          <h3>Upload Teams (CSV)</h3>
+          <p style="margin-bottom: 15px; color: var(--gray);">
+            CSV should have columns: name, seed, region
+          </p>
+          <div class="file-upload" onclick="document.getElementById('teamsCsv').click()">
+            <input type="file" id="teamsCsv" accept=".csv" onchange="uploadTeams(this)">
+            <p style="font-size: 1.2em; color: var(--navy);">📁 Click to upload CSV file</p>
+            <p style="color: var(--gray); margin-top: 10px;">Teams will be imported into the database</p>
+          </div>
+        </div>
+
+        <div class="admin-section">
+          <h3>Branding Settings</h3>
+          <div class="form-group">
+            <label for="companyName">Company Name</label>
+            <input type="text" id="companyName" placeholder="March Madness">
+          </div>
+          <div class="form-group">
+            <label for="logoUrl">Header Logo URL</label>
+            <input type="url" id="logoUrl" placeholder="https://example.com/logo.png">
+          </div>
+          <div class="form-group">
+            <label for="emailLogoUrl">Email Logo URL</label>
+            <input type="url" id="emailLogoUrl" placeholder="https://example.com/logo.png">
+          </div>
+          <button class="btn" onclick="saveSettings()">Save Branding</button>
+        </div>
+
+        <div class="admin-section">
+          <h3>Email Settings</h3>
+          <div class="form-group">
+            <label for="smtpHost">SMTP Host</label>
+            <input type="text" id="smtpHost" placeholder="smtp.gmail.com">
+          </div>
+          <div class="form-group">
+            <label for="smtpPort">SMTP Port</label>
+            <input type="number" id="smtpPort" placeholder="587">
+          </div>
+          <div class="form-group">
+            <label for="smtpUser">SMTP Username</label>
+            <input type="text" id="smtpUser" placeholder="your-email@gmail.com">
+          </div>
+          <div class="form-group">
+            <label for="smtpPass">SMTP Password</label>
+            <input type="password" id="smtpPass" placeholder="your-app-password">
+          </div>
+          <div class="form-group">
+            <label for="fromEmail">From Email</label>
+            <input type="email" id="fromEmail" placeholder="noreply@yourdomain.com">
+          </div>
+          <button class="btn" onclick="saveEmailSettings()">Save Email Settings</button>
+        </div>
+
+        <div class="admin-section">
+          <h3>Send Weekly Winners Email</h3>
+          <div class="week-selector">
+            <button onclick="sendWeeklyEmail(1)">Send Week 1 Winners</button>
+            <button onclick="sendWeeklyEmail(2)">Send Week 2 Winners</button>
+            <button onclick="sendWeeklyEmail(3)">Send Week 3 Winners</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Participant Details Modal -->
+  <div id="participantModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="participantDetails"></div>
+    </div>
+  </div>
+
+  <script>
+    let currentParticipant = null;
+    let allTeams = [];
+
+    // Initialize app
+    document.addEventListener('DOMContentLoaded', () => {
+      loadSettings();
+      loadUpsets();
+      loadTeams();
+      
+      // Check if user has already registered
+      const savedEmail = localStorage.getItem('participantEmail');
+      if (savedEmail) {
+        checkExistingParticipant(savedEmail);
+      }
+    });
+
+    // Load settings
+    async function loadSettings() {
+      try {
+        const response = await fetch('/api/settings');
+        const settings = await response.json();
+        
+        if (settings.logo_url) {
+          document.getElementById('logoContainer').innerHTML = 
+            `<img src="${settings.logo_url}" alt="Logo" class="logo">`;
+        }
+        
+        if (settings.company_name) {
+          document.querySelector('.header h1').textContent = settings.company_name;
+        }
+      } catch (error) {
+        console.error('Error loading settings:', error);
+      }
+    }
+
+    // Load upsets
+    async function loadUpsets() {
+      try {
+        const response = await fetch('/api/upsets');
+        const upsets = await response.json();
+        
+        if (upsets.length > 0) {
+          document.getElementById('cinderellaBox').style.display = 'block';
+          const upsetsList = document.getElementById('upsetsList');
+          upsetsList.innerHTML = upsets.map(upset => {
+            const seedDiff = Math.abs(upset.team1_seed - upset.team2_seed);
+            return `
+              <div class="upset-item">
+                <strong>${upset.winner_name}</strong> (${upset.winner_seed} seed) 
+                defeated a ${upset.winner_seed > upset.team1_seed ? upset.team1_seed : upset.team2_seed} seed
+                <span style="float: right;">+${seedDiff} upset points</span>
+              </div>
+            `;
+          }).join('');
+        }
+      } catch (error) {
+        console.error('Error loading upsets:', error);
+      }
+    }
+
+    // Load teams
+    async function loadTeams() {
+      try {
+        const response = await fetch('/api/teams');
+        allTeams = await response.json();
+        displayBracket();
+      } catch (error) {
+        console.error('Error loading teams:', error);
+      }
+    }
+
+    // Display bracket
+    function displayBracket() {
+      const container = document.getElementById('bracketContainer');
+      const regions = ['East', 'West', 'South', 'Midwest', 'Final Four'];
+      
+      const regionTeams = {};
+      allTeams.forEach(team => {
+        if (!regionTeams[team.region]) {
+          regionTeams[team.region] = [];
+        }
+        regionTeams[team.region].push(team);
+      });
+
+      container.innerHTML = regions.map(region => {
+        const teams = regionTeams[region] || [];
+        teams.sort((a, b) => a.seed - b.seed);
+        
+        return `
+          <div class="region-bracket">
+            <div class="region-header" onclick="toggleRegion('${region}')">
+              <h3>${region}</h3>
+              <span class="arrow" id="arrow-${region}">▼</span>
+            </div>
+            <div class="region-content" id="content-${region}">
+              <div class="region-teams">
+                ${teams.map(team => `
+                  <div class="team-item ${team.eliminated ? 'eliminated' : ''}">
+                    <div>
+                      <div class="team-name">${team.name}</div>
+                      <div class="team-region">${team.region}</div>
+                    </div>
+                    <div class="team-seed">${team.seed}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Toggle region
+    function toggleRegion(region) {
+      const content = document.getElementById(`content-${region}`);
+      const arrow = document.getElementById(`arrow-${region}`);
+      
+      content.classList.toggle('expanded');
+      arrow.classList.toggle('rotated');
+    }
+
+    // Show section
+    function showSection(sectionName) {
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.querySelectorAll('.nav button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      document.getElementById(sectionName).classList.add('active');
+      event.target.classList.add('active');
+
+      if (sectionName === 'leaderboard') {
+        loadLeaderboard('overall');
+      }
+    }
+
+    // Register form
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const messageContainer = document.getElementById('messageContainer');
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Processing...';
+      
+      try {
+        const response = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          localStorage.setItem('participantEmail', email);
+          localStorage.setItem('participantId', data.participant.id);
+          currentParticipant = data.participant;
+          
+          messageContainer.innerHTML = `
+            <div class="message success">${data.message}</div>
+          `;
+          
+          displayTeamPack(data.teams);
+          loadMyTeam();
+        } else {
+          messageContainer.innerHTML = `
+            <div class="message error">${data.error || 'Registration failed'}</div>
+          `;
+        }
+      } catch (error) {
+        messageContainer.innerHTML = `
+          <div class="message error">An error occurred. Please try again.</div>
+        `;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Get My Team Pack';
+      }
+    });
+
+    // Display team pack
+    function displayTeamPack(teams) {
+      const resultDiv = document.getElementById('registrationResult');
+      resultDiv.style.display = 'block';
+      
+      resultDiv.innerHTML = `
+        <div class="team-pack">
+          <h3>🎉 Your Team Pack</h3>
+          ${teams.map(team => `
+            <div class="team-item ${team.eliminated ? 'eliminated' : ''}">
+              <div>
+                <div class="team-name">${team.name}</div>
+                <div class="team-region">${team.region} Region</div>
+              </div>
+              <div class="team-seed">${team.seed}</div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    // Check existing participant
+    async function checkExistingParticipant(email) {
+      try {
+        const response = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: '', email })
+        });
+        
+        const data = await response.json();
+        
+        if (data.participant && data.teams) {
+          currentParticipant = data.participant;
+          document.getElementById('name').value = data.participant.name;
+          document.getElementById('email').value = email;
+          displayTeamPack(data.teams);
+          loadMyTeam();
+        }
+      } catch (error) {
+        console.error('Error checking participant:', error);
+      }
+    }
+
+    // Load leaderboard
+    async function loadLeaderboard(type) {
+      const loadingDiv = document.getElementById('leaderboardLoading');
+      const contentDiv = document.getElementById('leaderboardContent');
+      
+      loadingDiv.style.display = 'block';
+      contentDiv.innerHTML = '';
+      
+      // Update active button
+      document.querySelectorAll('.week-selector button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      try {
+        const response = await fetch(`/api/leaderboard/${type}`);
+        const data = await response.json();
+        
+        loadingDiv.style.display = 'none';
+        
+        if (data.length === 0) {
+          contentDiv.innerHTML = '<div class="message info">No data available yet.</div>';
+          return;
+        }
+        
+        const payouts = { 1: 50, 2: 25, 3: 10 };
+        const isOverall = type === 'overall';
+        const overallPayout = { 1: 100 };
+        
+        contentDiv.innerHTML = `
+          <table class="leaderboard-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>${isOverall ? 'Overall Points' : 'Week Points'}</th>
+                ${!isOverall ? '<th>Overall Points</th>' : ''}
+                <th>Payout</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${data.map((participant, index) => {
+                const rank = index + 1;
+                const rankClass = rank === 1 ? 'first' : rank === 2 ? 'second' : rank === 3 ? 'third' : '';
+                const payout = isOverall ? overallPayout[rank] : payouts[rank];
+                
+                return `
+                  <tr onclick="showParticipantDetails(${participant.id})">
+                    <td class="rank ${rankClass}">${rank}</td>
+                    <td>${participant.name}</td>
+                    <td><strong>${(isOverall ? participant.overall_points : participant.week_points).toFixed(1)}</strong></td>
+                    ${!isOverall ? `<td>${participant.overall_points.toFixed(1)}</td>` : ''}
+                    <td>${payout ? `<span class="payout-badge">$${payout}</span>` : '-'}</td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        `;
+      } catch (error) {
+        loadingDiv.style.display = 'none';
+        contentDiv.innerHTML = '<div class="message error">Error loading leaderboard</div>';
+      }
+    }
+
+    // Show participant details
+    async function showParticipantDetails(participantId) {
+      try {
+        const response = await fetch(`/api/participant/${participantId}`);
+        const data = await response.json();
+        
+        const modal = document.getElementById('participantModal');
+        const detailsDiv = document.getElementById('participantDetails');
+        
+        const weekPayouts = {
+          1: [50, 25, 10],
+          2: [50, 25, 10],
+          3: [50, 25, 10]
+        };
+        
+        detailsDiv.innerHTML = `
+          <h2 style="color: var(--navy); margin-bottom: 20px;">${data.participant.name}</h2>
+          
+          <h3 style="color: var(--navy); margin: 20px 0 10px 0;">Teams</h3>
+          ${data.teams.map(team => `
+            <div class="team-item ${team.eliminated ? 'eliminated' : ''}">
+              <div>
+                <div class="team-name">${team.name} ${team.is_bonus ? '(Bonus)' : ''}</div>
+                <div class="team-region">${team.region} Region</div>
+              </div>
+              <div class="team-seed">${team.seed}</div>
+            </div>
+          `).join('')}
+          
+          <h3 style="color: var(--navy); margin: 20px 0 10px 0;">Scores</h3>
+          <table class="leaderboard-table">
+            <thead>
+              <tr>
+                <th>Week</th>
+                <th>Week Points</th>
+                <th>Overall Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${data.scores.map(score => `
+                <tr>
+                  <td>Week ${score.week}</td>
+                  <td>${score.points.toFixed(1)}</td>
+                  <td>${score.overall_points.toFixed(1)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+        
+        modal.classList.add('active');
+      } catch (error) {
+        console.error('Error loading participant details:', error);
+      }
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('participantModal').classList.remove('active');
+    }
+
+    // Load my team
+    async function loadMyTeam() {
+      const participantId = localStorage.getItem('participantId');
+      if (!participantId) {
+        return;
+      }
+      
+      try {
+        const response = await fetch(`/api/participant/${participantId}`);
+        const data = await response.json();
+        
+        const contentDiv = document.getElementById('myTeamContent');
+        contentDiv.innerHTML = `
+          <h3 style="color: var(--navy); margin-bottom: 15px;">Welcome back, ${data.participant.name}!</h3>
+          
+          <div class="team-pack">
+            <h3>Your Teams</h3>
+            ${data.teams.map(team => `
+              <div class="team-item ${team.eliminated ? 'eliminated' : ''}">
+                <div>
+                  <div class="team-name">${team.name} ${team.is_bonus ? '(Bonus)' : ''}</div>
+                  <div class="team-region">${team.region} Region</div>
+                </div>
+                <div class="team-seed">${team.seed}</div>
+              </div>
+            `).join('')}
+          </div>
+          
+          <div style="margin-top: 30px;">
+            <h3 style="color: var(--navy); margin-bottom: 15px;">Your Scores</h3>
+            <table class="leaderboard-table">
+              <thead>
+                <tr>
+                  <th>Week</th>
+                  <th>Week Points</th>
+                  <th>Overall Points</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${data.scores.map(score => `
+                  <tr>
+                    <td>Week ${score.week}</td>
+                    <td><strong>${score.points.toFixed(1)}</strong></td>
+                    <td><strong>${score.overall_points.toFixed(1)}</strong></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      } catch (error) {
+        console.error('Error loading my team:', error);
+      }
+    }
+
+    // Upload teams CSV
+    async function uploadTeams(input) {
+      const file = input.files[0];
+      if (!file) return;
+      
+      const formData = new FormData();
+      formData.append('file', file);
+      
+      try {
+        const response = await fetch('/api/admin/upload-teams', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          alert(`Success! ${data.count} teams uploaded.`);
+          loadTeams();
+        } else {
+          alert('Error uploading teams: ' + data.error);
+        }
+      } catch (error) {
+        alert('Error uploading teams: ' + error.message);
+      }
+      
+      input.value = '';
+    }
+
+    // Save settings
+    async function saveSettings() {
+      const settings = {
+        company_name: document.getElementById('companyName').value,
+        logo_url: document.getElementById('logoUrl').value,
+        email_logo_url: document.getElementById('emailLogoUrl').value
+      };
+      
+      try {
+        const response = await fetch('/api/admin/settings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(settings)
+        });
+        
+        if (response.ok) {
+          alert('Settings saved successfully!');
+          loadSettings();
+        } else {
+          alert('Error saving settings');
+        }
+      } catch (error) {
+        alert('Error saving settings: ' + error.message);
+      }
+    }
+
+    // Save email settings
+    async function saveEmailSettings() {
+      const settings = {
+        smtp_host: document.getElementById('smtpHost').value,
+        smtp_port: document.getElementById('smtpPort').value,
+        smtp_user: document.getElementById('smtpUser').value,
+        smtp_pass: document.getElementById('smtpPass').value,
+        from_email: document.getElementById('fromEmail').value
+      };
+      
+      try {
+        const response = await fetch('/api/admin/settings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(settings)
+        });
+        
+        if (response.ok) {
+          alert('Email settings saved successfully!');
+        } else {
+          alert('Error saving email settings');
+        }
+      } catch (error) {
+        alert('Error saving email settings: ' + error.message);
+      }
+    }
+
+    // Send weekly email
+    function sendWeeklyEmail(week) {
+      if (confirm(`Send weekly winners email for Week ${week}?`)) {
+        alert(`This feature requires additional backend implementation. Week ${week} winners email would be sent.`);
+      }
+    }
+
+    // Close modal on outside click
+    document.getElementById('participantModal').addEventListener('click', (e) => {
+      if (e.target.id === 'participantModal') {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
+
